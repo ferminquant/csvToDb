@@ -1,8 +1,7 @@
 ﻿using System;
-using System.IO;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace csvToDb.EF
 {
@@ -77,5 +76,9 @@ namespace csvToDb.EF
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public void truncateTable(Type type){
+            this.Database.ExecuteSqlRaw($"TRUNCATE TABLE {this.Model.FindEntityType(type).GetTableName()};");
+        }
     }
 }
