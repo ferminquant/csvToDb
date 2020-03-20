@@ -29,5 +29,12 @@ namespace csvToDb
             }
             return items;
         }
+        public static string getExceptionMessages(Exception ex){
+            if (ex != null)
+            {
+                return ex.Message + Environment.NewLine + getExceptionMessages(ex.InnerException);
+            }
+            return "";
+        }
     }
 }
